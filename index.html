@@ -30,16 +30,14 @@
 		<div class="slides">
 			<section>
 				<h1>基于体态语言的设计固化识别方法研究</h1>
-				<p class="fragment">用机器学习
-					<q>做了一点微小的工作</q>
-				</p>
+				<p class="fragment">2用机器学习<q>做了一点微小的工作</q></p>
 			</section>
 			<section>
 				<h2>分享内容概要</h2>
 				<ol>
 					<li>背景知识：机器学习</li>
-					<li>论文交流：我如何用机器学习做这个研究</li>
-					<li>论文撰写Tips2</li>
+					<li>论文交流：如何用机器学习做这个研究</li>
+					<li>论文撰写经验：工具、技巧、注意事项</li>
 				</ol>
 			</section>
 			<section>
@@ -48,7 +46,16 @@
 					<h2>Machine Learning</h2>
 				</section>
 				<section>
-					ml is ...
+					<h2>什么是机器学习</h2>
+					<blockquote>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if
+					its performance at tasks in T, as measured by P, improves with experience E.</blockquote>
+					<blockquote>机器学习是用数据或以往的经验，以此优化计算机程序的性能标准。</blockquote>
+				</section>
+				<section>
+					<h2>小游戏：人肉学习</h2>
+				</section>
+				<section>
+					<iframe src="http://localhost:8888/notebooks/Documents/design-fixation-ppt/examples/game1-human%20learning.ipynb#"></iframe>
 				</section>
 			</section>
 		</div>
@@ -63,6 +70,7 @@
 		// - https://github.com/hakimel/reveal.js#dependencies
 		Reveal.initialize({
 			history: true,
+			// controls: false,
 			dependencies: [{
 					src: 'plugin/markdown/marked.js'
 				},
