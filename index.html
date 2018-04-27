@@ -41,22 +41,126 @@
 				</ol>
 			</section>
 			<section>
-				<section>
-					<h1>机器学习</h1>
-					<h2>Machine Learning</h2>
-				</section>
-				<section>
-					<h2>什么是机器学习</h2>
-					<blockquote>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if
-					its performance at tasks in T, as measured by P, improves with experience E.</blockquote>
-					<blockquote>机器学习是用数据或以往的经验，以此优化计算机程序的性能标准。</blockquote>
-				</section>
+				<h1>机器学习</h1>
+				<h2>Machine Learning</h2>
+			</section>
+			<section>
+				<h2>什么是机器学习</h2>
+				<blockquote>机器学习是用数据或以往的经验，以此优化计算机程序的性能标准。</blockquote>
+				<blockquote>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if
+				its performance at tasks in T, as measured by P, improves with experience E.</blockquote>
+			</section>
+			<section>
 				<section>
 					<h2>小游戏：人肉学习</h2>
+					<p>规则：程序会随机生成一个<strong>0到1之间的小数</strong>，你要尽可能准确地猜测它的大小</p>
+					<p>提示：每次猜测后程序都会告诉你一个指标，指标的大小反映了你猜测误差的大小</p>
+					<p>PS：我也没那么严格，你把指标降到0.0001以下就算你赢了</p>
 				</section>
+				<section data-background-iframe="http://localhost:8888/notebooks/Documents/design-fixation-ppt/examples/game1-human%20learning.ipynb"></section>
+			</section>
+			<section>
+				<h2>刚才发生了什么</h2>
+				<dl>
+					<dt class="fragment">T - tasks</dt>
+					<dd class="fragment">尽可能准确地猜出数字大小</dd>
+					<dt class="fragment">P - performance measure</dt>
+					<dd class="fragment">误差指标</dd>
+					<dt class="fragment">E - experience</dt>
+					<dd class="fragment">你多次猜测后的获得的经验</dd>
+				</dl>
+			</section>
+			<section>
+				<h2>小结：机器学习工作原理</h2>
+				<p class="fragment">所有机器学习都是这3步：</p>
+				<ol>
+					<li class="fragment">确定目标</li>
+					<li class="fragment">量化误差</li>
+					<li class="fragment">迭代，减小误差</li>
+				</ol>
+			</section>
+			<section>
+				<h2>三个案例讲解三类基本算法</h2>
+				<ul>
+					<li>线性回归 (linear regression)</li>
+					<li>分类 (classification)</li>
+					<li>聚类 (cluster)</li>
+				</ul>
+			</section>
+			<section>
+				<h2>线性回归</h2>
+				<h3>linear regression</h3>
+			</section>
+			<section>
+				<p>已知在一个平面坐标系内有一些点，它们的$(x,y)$坐标如下：</p>
+				<table>
+					<thead>
+						<tr>
+							<th>x</th>
+							<th>y</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>0</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>5</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>9</td>
+						</tr>
+						<tr>
+							<td>8</td>
+							<td>17</td>
+						</tr>
+						<tr>
+							<td>16</td>
+							<td>33</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>如果告诉你这个平面上还有一个点，它的$x$坐标是10，那么你觉得他的$y$坐标该是多少？</p>
+			</section>
+			<section>
 				<section>
-					<iframe src="http://localhost:8888/notebooks/Documents/design-fixation-ppt/examples/game1-human%20learning.ipynb#"></iframe>
+					<p>数字太抽象了</p>
+					<p>我们通过可视化来观察一下</p>
 				</section>
+				<section data-background-iframe="http://localhost:8888/notebooks/Documents/design-fixation-ppt/examples/regression.ipynb"></section>
+			</section>
+			<section>
+				<p>刚才的是理想情况，</p>
+				<p class="fragment">现实往往是这样<br /><img src="/examples/img/regression_true.png"></p>
+			</section>
+			<section>
+				<h2>更复杂的情况</h2>
+				<ul>
+					<li class="fragment">多个特征变量：$y=2x_1-5x_2$</li>
+					<li class="fragment">非线性：$y=x^3-3x^2+2x$<br />
+					<img src="/examples/img/regression_nonlinear.png"></li>
+				</ul>
+			</section>
+			<section>
+				<h2>分类</h2>
+				<h3>classification</h3>
+			</section>
+			<section>
+				<h2>二分类问题</h2>
+				<p>依然通过线性回归预测$y$的值：<br />当$y$超过某个阈值时，则认为它是第一类；<br />当$y$未达到某个阈值时，则认为它是第二类</p>
+			</section>
+			<section>
+				<h2>多分类问题</h2>
+				<p>依然通过二分类来解决，以三分类为例：</p>
+				<ol>
+					<li>判断是/不是第一类，得到一个概率值$P_1$</li>
+					<li>判断是/不是第二类，得到一个概率值$P_2$</li>
+					<li>判断是/不是第三类，得到一个概率值$P_3$</li>
+					<li>看$P_1 P_2 P_3$哪个最大就是哪个</li>
+				</ol>
 			</section>
 		</div>
 	</div>
@@ -71,6 +175,10 @@
 		Reveal.initialize({
 			history: true,
 			// controls: false,
+			math: {
+				mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			},
 			dependencies: [{
 					src: 'plugin/markdown/marked.js'
 				},
@@ -95,7 +203,8 @@
 				{
 					src: 'plugin/notes-server/client.js',
 					async: true
-				}
+				},
+				{ src: 'plugin/math/math.js', async: true }
 			]
 		});
 	</script>
