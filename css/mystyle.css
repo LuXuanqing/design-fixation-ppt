@@ -1,0 +1,14 @@
+.flex-container {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+}
+.flex-1 {
+    flex: 1;
+}
+.flex-2 {
+    flex: 2;
+}
+.flex-3 {
+    flex: 3;
+}
