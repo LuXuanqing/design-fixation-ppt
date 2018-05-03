@@ -33,217 +33,22 @@
 		<div class="slides">
 			<section>
 				<h1>基于体态语言的设计固化识别方法研究</h1>
-				<p class="fragment">用机器学习
+				<p>用机器学习
 					<q>做了一点微小的工作</q>
 				</p>
 			</section>
+
 			<section>
-				<h2>分享内容概要</h2>
+				<h2>论文内容概要</h2>
 				<ol>
-					<li>背景知识：机器学习</li>
-					<li>论文交流：如何用机器学习做这个研究</li>
-					<li>论文撰写经验：工具、技巧、注意事项</li>
+					<li>背景知识介绍</li>
+					<li>实验数据的获取与分析</li>
+					<li>通过机器学习建立识别模型</li>
 				</ol>
 			</section>
+
 			<section>
-				<h1>机器学习</h1>
-				<h2>Machine Learning</h2>
-			</section>
-			<section>
-				<h2>什么是机器学习</h2>
-				<blockquote>机器学习是用数据或以往的经验，以此优化计算机程序的性能标准。</blockquote>
-				<blockquote>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P,
-					if its performance at tasks in T, as measured by P, improves with experience E.</blockquote>
-			</section>
-			<section>
-				<section>
-					<h2>小游戏：人肉学习</h2>
-					<p>规则：程序会随机生成一个
-						<strong>0到1之间的小数</strong>，你要尽可能准确地猜测它的大小</p>
-					<p>提示：每次猜测后程序都会告诉你一个指标，指标的大小反映了你猜测误差的大小</p>
-					<p>PS：我也没那么严格，你把指标降到0.0001以下就算你赢了</p>
-				</section>
-				<section data-background-iframe="http://10.199.172.124:8888/notebooks/Documents/design-fixation-ppt/examples/game1-human%20learning.ipynb"></section>
-			</section>
-			<section>
-				<h2>刚才发生了什么</h2>
-				<dl>
-					<div class="fragment">
-						<dt>T - tasks</dt>
-						<dd>尽可能准确地猜出数字大小</dd>
-					</div>
-					<div class="fragment">
-						<dt>P - performance measure</dt>
-						<dd>误差指标</dd>
-					</div>
-					<div class="fragment">
-						<dt>E - experience</dt>
-						<dd>你多次猜测后的获得的经验</dd>
-					</div>
-				</dl>
-			</section>
-			<section>
-				<h2>小结：机器学习工作原理</h2>
-				<p class="fragment">所有机器学习都是这3步：</p>
-				<ol>
-					<li class="fragment">确定目标</li>
-					<li class="fragment">量化误差</li>
-					<li class="fragment">迭代，减小误差</li>
-				</ol>
-			</section>
-			<section>
-				<h2>三个案例讲解三类基本算法</h2>
-				<ul>
-					<li>线性回归 (linear regression)</li>
-					<li>分类 (classification)</li>
-					<li>聚类 (cluster)</li>
-				</ul>
-			</section>
-			<section>
-				<h2>线性回归</h2>
-				<h3>linear regression</h3>
-			</section>
-			<section>
-				<p>已知在一个平面坐标系内有一些点，它们的$(x,y)$坐标如下：</p>
-				<table>
-					<tbody>
-						<tr>
-							<td>$x$</td>
-							<td>0</td>
-							<td>2</td>
-							<td>4</td>
-							<td>8</td>
-							<td>16</td>
-						</tr>
-						<tr>
-							<td>$y$</td>
-							<td>1</td>
-							<td>5</td>
-							<td>9</td>
-							<td>17</td>
-							<td>33</td>
-						</tr>
-					</tbody>
-				</table>
-				<p>如果告诉你这个平面上还有一个点，它的$x$坐标是10，那么你觉得他的$y$坐标该是多少？</p>
-			</section>
-			<section>
-				<section>
-					<p>数字太抽象了</p>
-					<p>我们通过可视化来观察一下</p>
-				</section>
-				<section data-background-iframe="http://10.199.172.124:8888/notebooks/Documents/design-fixation-ppt/examples/regression.ipynb"></section>
-			</section>
-			<section>
-				<p>刚才的是理想情况，</p>
-				<p class="fragment">现实往往是这样
-					<br />
-					<img src="/examples/img/regression_true.png">
-				</p>
-			</section>
-			<section>
-				<p>$y=kx+b$</p>
-				<p>其中，$k$和$b$就是你需要猜的数字</p>
-				<ol>
-					<li>定义目标：用一个函数尽可能地拟合这些点</li>
-					<li>量化误差：loss=点到直线的距离（垂直方向上）</li>
-					<li>迭代优化：不断调整$k$和$b$，让loss尽量小</li>
-				</ol>
-				<p>回想一下第一个游戏，对照这三个步骤</p>
-			</section>
-			<section>
-				<h2>更复杂的情况</h2>
-				<ul>
-					<li class="fragment">多个特征变量：$y=2x_1-5x_2$</li>
-					<li class="fragment">非线性：$y=x^3-3x^2+2x$
-						<br />
-						<img src="/examples/img/regression_nonlinear.png">
-					</li>
-				</ul>
-			</section>
-			<section>
-				<h2>分类</h2>
-				<h3>classification</h3>
-			</section>
-			<section>
-				<h2>二分类问题</h2>
-				<p>依然通过线性回归预测$y$的值：
-					<br />当$y$超过某个阈值时，则认为它是第一类；
-					<br />当$y$未达到某个阈值时，则认为它是第二类</p>
-			</section>
-			<section>
-				<h2>多分类问题</h2>
-				<p>依然通过二分类来解决，以三分类为例：</p>
-				<ol>
-					<li>判断是/不是第一类，得到一个概率值$P_1$</li>
-					<li>判断是/不是第二类，得到一个概率值$P_2$</li>
-					<li>判断是/不是第三类，得到一个概率值$P_3$</li>
-					<li>看$P_1 P_2 P_3$哪个最大就是哪个</li>
-				</ol>
-			</section>
-			<section>
-				<h2>聚类</h2>
-				<h3>cluster</h3>
-			</section>
-			<section>
-				<p>聚类就是把一个数据集分成若干个子集，每个子集中的样本拥有相似的属性</p>
-				<p>它是一种
-					<strong>非监督学习</strong>
-				</p>
-				<table>
-					<thead>
-						<tr>
-							<th>算法</th>
-							<th>类别</th>
-							<th>备注</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>回归</td>
-							<td>监督</td>
-							<td>要告诉机器每个$x$对应的$y$</td>
-						</tr>
-						<tr>
-							<td>分类</td>
-							<td>监督</td>
-							<td>要告诉机器每个样本对应的类别</td>
-						</tr>
-						<tr>
-							<td>回归</td>
-							<td>非监督</td>
-							<td>不用告诉机器哪些样本是同一类</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-			<section>
-				<section>
-					<h2>案例：鸢尾花的花瓣</h2>
-					<p>已知有三个品种的鸢尾花，它们花瓣的长度和宽度各不相同。现有150朵鸢尾花花瓣的长宽数据，请问你能否把它们按品种归类？</p>
-				</section>
-				<section data-background-iframe="http://10.199.172.124:8888/notebooks/Documents/design-fixation-ppt/examples/iris.ipynb"></section>
-			</section>
-			<section>
-				<h2>小结</h2>
-				<p>当你手中有了若干样本的数据，你就可以用机器学习做这些事情：</p>
-				<ol>
-					<li>回归：根据一些变量的值来预测另一些变量的值（连续变量），例如根据面积、房龄预测房屋售价</li>
-					<li>分类：根据一些变量的值来预测其种类（离散变量），例如根据三围预测性别</li>
-					<li>聚类：根据一些变量的值把样本分为若干类，例如根据对电影的评分为你推荐感兴趣的人（协同过滤）</li>
-				</ol>
-				<aside class="notes">不仅可以推荐人，还可以推荐电影</aside>
-			</section>
-			<section>
-				<h1>take a 5-min break</h1>
-				<p>please be free to ask me any question</p>
-			</section>
-			<section>
-				<h2>如何用机器学习做我的论文</h2>
-				<h3>基于体态语言的设计固化识别方法研究</h3>
-			</section>
-			<section>
-				<h3>背景知识</h3>
+				<h2>背景知识</h2>
 				<ul>
 					<li>体态语言：可以粗浅地理解为
 						<em>行为</em>
@@ -253,8 +58,9 @@
 					</li>
 				</ul>
 			</section>
+
 			<section>
-				<h3>如何识别固化</h3>
+				<h2>如何识别固化</h2>
 				<table>
 					<thead>
 						<tr>
@@ -271,36 +77,32 @@
 				</table>
 				<p>用机器学习建立一个$y=f(x)$的方程，只要观测并统计行为频次即可知道固化程度</p>
 			</section>
+			<!-- 体态语言获取实验 -->
 			<section>
-				<section>
-					<p>先从容易的说起</p>
-					<h3>如何获得特征变量（行为频次）</h3>
-				</section>
-				<section>
-					<h3>体态语言获取实验</h3>
-					<p>对杯子进行造型的概念设计，观察被试的行为表现</p>
-					<p>目的是获取设计过程中会出现哪些行为</p>
-					<img src="img/exp1.jpg" width="60%">
-				</section>
-				<section>
-					<p>最后通过对12名被试的观察，得出了8种设计行为</p>
-					<img src="img/behaviors3.jpg" width="40%">
-				</section>
-				<section>
-					<p>每次都人工统计行为频次太麻烦，需要自动化</p>
-					<h4 class="fragment">基于机器视觉的行为识别模型</h4>
-				</section>
+				<h2>如何获得特征变量（行为频次）</h2>
 			</section>
 			<section>
-				<section>
-					<p>行为频次好观察</p>
-					<h3>如何获得固化程度（需要预测的值）</h3>
-				</section>
-				<section>
-					<h3>固化程度评价实验</h3>
-					<p>对12名被试设计的158个方案草图进行评价，确定其固化程度</p>
-					<p>目的是建立行为频次($x$)与固化程度($y$)之间的关系模型，以后只需要输入$x$就能得到$y$</p>
-				</section>
+				<h3>体态语言获取实验</h3>
+				<p>对杯子进行造型的概念设计，观察被试的行为表现</p>
+				<p>目的是获取设计过程中会出现哪些行为</p>
+				<img src="img/exp1.jpg" width="60%">
+			</section>
+			<section>
+				<h3>设计行为谱</h3>
+				<p>最后通过对12名被试的观察，得出了8种设计行为</p>
+				<img src="img/behaviors3.jpg" width="60%">
+			</section>
+			<!-- 方案固化程度评价实验 -->
+			<section>
+				<h2>如何获得固化程度
+					<br/>（需要预测的值）</h2>
+			</section>
+			<section>
+				<h3>固化程度评价实验</h3>
+				<p>邀请6位专家对12名被试设计的158个方案草图进行评价，确定其固化程度</p>
+				<img src="img/exp2.jpeg" width="50%">
+			</section>
+			<section>
 				<section>
 					<h3>固化程度评价方法</h3>
 					<p>目前相关研究所用的方法主要是统计重复方案数量</p>
@@ -314,7 +116,7 @@
 					<img src="img/experience.jpg">
 				</section>
 				<section>
-					<h3>方案固化程度评价量表</h3>
+					<h4>方案固化程度评价量表</h4>
 					<div class="flex-container">
 						<div class="flex-1">
 							<img src="img/scale.jpg" width="70%">
@@ -329,10 +131,10 @@
 						</div>
 					</div>
 				</section>
-				<section>
-					<p>邀请6名专家对12名被试的158个方案进行评价，得到每个方案的固化程度评分和类别</p>
-					<img src="img/exp2.jpeg" width="60%">
-				</section>
+			</section>
+
+			<!-- 评价结果 -->
+			<section>
 				<section>
 					<div class="flex-container">
 						<div class="flex-1">
@@ -403,27 +205,104 @@
 						</div>
 					</div>
 				</section>
+			</section>
+			<!-- ANOVA -->
+			<section>
 				<section>
 					<h3>单因素方差分析</h3>
+					<div class="flex-container">
+						<div class="flex-3">
+							<blockquote>方差分析是用于检验不同水平对实验指标有无显著性影响的方法。实验中要考察的指标称为实验指标，影响实验指标的条件称为因素，因素所处的状态称为水平。</blockquote>
+						</div>
+						<div class="flex-2">
+							<dl>
+								<dt>实验指标</dt>
+								<dd>各行为的频次</dd>
+								<dt>因素</dt>
+								<dd>固化</dd>
+								<dt>水平</dt>
+								<dd>固化程度</dd>
+							</dl>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h4>结果</h4>
 					<div class="flex-container">
 						<div class="flex-1">
 							<img src="img/anova.JPG" width="80%">
 						</div>
 						<div class="flex-1">
-							<p>直说结果：固化水平对以下三种的频次有显著影响</p>
+							<p>固化水平对以下三项指标有显著影响</p>
+							<ul>
+								<li>画图频次</li>
+								<li>动眼频次</li>
+								<li>转头频次</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</section>
+			<!-- pearson -->
+			<section>
+				<section>
+					<h3>皮尔森相关性分析</h3>
+					<blockquote>皮尔森相关系数是用于反映两个变量线性相关程度的统计量，一般用$r$表示。$r$的正负表示两个变量之间相关性的正负，当值为正时表示两者正相关，反之亦然。$r$的绝对值反应两个变量之间线性关系的强弱，当$r$值为零时表示不存在线性关系，但有可能是其他非线性关系。</blockquote>
+				</section>
+				<section>
+					<h4>结果</h4>
+					<div class="flex-container">
+						<div class="flex-1">
+							<img src="img/pearson.JPG" alt="">
+						</div>
+						<div class="flex-1">
+							<p>固化分值与以下行为的频次显著正相关，但相关性不强</p>
 							<ul>
 								<li>画图</li>
 								<li>动眼</li>
+								<li>动嘴</li>
 								<li>转头</li>
 							</ul>
 						</div>
 					</div>
 				</section>
+			</section>
+			<!-- 小结 -->
+			<section>
+				<h2>小结</h2>
+				<p>首先，我们获取了行为频次的数据、固化程度的数据，另外还有行为的视频数据</p>
+				<p>其次，我们证明了固化程度对
+					<em>画图</em>、
+					<em>动眼</em>、
+					<em>转头</em>的频次有显著影响，并且存在显著相关性</p>
+				<p>所以，理论上我们只要统计一个方案创造期间设计师这三种行为的频次就能知道这个方案的固化程度</p>
+			</section>
+			<!-- 机器学习 -->
+			<section>
+				<h2>通过机器学习识别设计固化</h2>
+				<ol>
+					<li>通过图像识别行为</li>
+					<li>通过行为统计识别固化</li>
+				</ol>
+				<img src="img/recognition.jpg" alt="">
+			</section>
+			<!-- 模型1 -->
+			<section>
+				<h3>行为识别模型</h3>
+				<p>用到了以下材料：</p>
+				<ul>
+					<li>Nvidia GTX 1060 显卡</li>
+					<li>深度学习框架Keras</li>
+					<li>经过预训练的VGG16卷积神经网络</li>
+					<li>体态语言获取实验中记录的视频</li>
+				</ul>
+			</section>
+			<section>
 				<section>
-					<h3>皮尔森相关性分析</h3>
+					<h4>建模及训练的步骤</h4>
+					<p>1 数据准备</p>
 				</section>
 			</section>
-
 		</div>
 	</div>
 

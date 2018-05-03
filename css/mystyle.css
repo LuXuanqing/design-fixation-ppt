@@ -12,3 +12,6 @@
 .flex-3 {
     flex: 3;
 }
+.reveal blockquote {
+    width: 90%
+}
