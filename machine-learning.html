@@ -78,7 +78,7 @@
 				</ol>
 			</section>
 			<section>
-				<h2>三个案例讲解三类基本算法</h2>
+				<h2>三类基本算法</h2>
 				<ul>
 					<li>线性回归 (linear regression)</li>
 					<li>分类 (classification)</li>
@@ -132,7 +132,7 @@
 						<img src="img/regression_true.png" width="80%">
 						<p>不是每个点都正好在直线上</p>
 					</div>
-					<div class="flex-1">
+					<div class="flex-1 fragment">
 						<p>$y=kx+b$，$k$和$b$是你需要猜的数字</p>
 						<ol>
 							<li>定义目标：用一个函数尽可能地拟合这些点</li>
@@ -144,33 +144,41 @@
 			</section>
 
 			<section>
-
-
-				<p>回想一下第一个游戏，对照这三个步骤</p>
+				<p>结合刚才玩过的智障游戏，再想一想这三个步骤</p>
+				<ol>
+					<li class="fragment">确定目标</li>
+					<li class="fragment">量化误差</li>
+					<li class="fragment">迭代，减小误差</li>
+				</ol>
 			</section>
+
 			<section>
 				<h2>更复杂的情况</h2>
 				<ul>
 					<li class="fragment">多个特征变量：$y=2x_1-5x_2$</li>
 					<li class="fragment">非线性：$y=x^3-3x^2+2x$
 						<br />
-						<img src="/examples/img/regression_nonlinear.png">
+						<img src="img/regression_nonlinear.png">
 					</li>
 				</ul>
 			</section>
+
+
 			<section>
 				<h2>分类</h2>
 				<h3>classification</h3>
 			</section>
+
 			<section>
-				<h2>二分类问题</h2>
+				<h3>二分类问题</h3>
 				<p>依然通过线性回归预测$y$的值：
 					<br />当$y$超过某个阈值时，则认为它是第一类；
 					<br />当$y$未达到某个阈值时，则认为它是第二类</p>
 			</section>
+
 			<section>
-				<h2>多分类问题</h2>
-				<p>依然通过二分类来解决，以三分类为例：</p>
+				<h3>多分类问题</h3>
+				<p>转变为二分类问题来解决，以三分类为例：</p>
 				<ol>
 					<li>判断是/不是第一类，得到一个概率值$P_1$</li>
 					<li>判断是/不是第二类，得到一个概率值$P_2$</li>
@@ -178,6 +186,7 @@
 					<li>看$P_1 P_2 P_3$哪个最大就是哪个</li>
 				</ol>
 			</section>
+
 			<section>
 				<h2>聚类</h2>
 				<h3>cluster</h3>
