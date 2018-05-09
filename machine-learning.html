@@ -45,7 +45,7 @@
 				<section>
 					<h2>小游戏：人肉学习</h2>
 					<p>规则：程序会随机生成一个
-						<strong>0到1之间的小数</strong>，你要尽可能准确地猜测它的大小</p>
+						<em>0到1之间的小数</em>，你要尽可能准确地猜测它的大小</p>
 					<p>提示：每次猜测后程序都会告诉你一个指标，指标的大小反映了你猜测误差的大小</p>
 					<p>PS：我也没那么严格，你把指标降到0.0001以下就算你赢了</p>
 				</section>
@@ -74,7 +74,7 @@
 				<ol>
 					<li class="fragment">确定目标</li>
 					<li class="fragment">量化误差</li>
-					<li class="fragment">迭代，减小误差</li>
+					<li class="fragment">迭代</li>
 				</ol>
 			</section>
 			<section>
@@ -88,7 +88,7 @@
 			<section>
 				<h2>线性回归</h2>
 				<h3>linear regression</h3>
-				<p>根据一些变量的值来预测另一些变量的值（连续变量），例如根据面积、房龄预测房屋售价$</p>
+				<p>根据一些变量的值来预测另一些变量的值（连续变量），例如根据面积、房龄预测房屋售价</p>
 				<p>它就像是建立一个$y$关于$x$的方程，只要输入特征变量($x$)，就能预测结果($y$)</p>
 			</section>
 
@@ -137,7 +137,7 @@
 						<ol>
 							<li>定义目标：用一个函数尽可能地拟合这些点</li>
 							<li>量化误差：loss=点到直线的距离（垂直方向上）</li>
-							<li>迭代优化：不断调整$k$和$b$，让loss尽量小</li>
+							<li>迭代：不断调整$k$和$b$，让loss尽量小</li>
 						</ol>
 					</div>
 				</div>
@@ -146,9 +146,9 @@
 			<section>
 				<p>结合刚才玩过的智障游戏，再想一想这三个步骤</p>
 				<ol>
-					<li class="fragment">确定目标</li>
-					<li class="fragment">量化误差</li>
-					<li class="fragment">迭代，减小误差</li>
+					<li>确定目标</li>
+					<li>量化误差</li>
+					<li>迭代</li>
 				</ol>
 			</section>
 
@@ -216,7 +216,7 @@
 							<td>要告诉机器每个样本对应的类别</td>
 						</tr>
 						<tr>
-							<td>回归</td>
+							<td>聚类</td>
 							<td>非监督</td>
 							<td>不用告诉机器哪些样本是同一类</td>
 						</tr>
@@ -227,9 +227,17 @@
 				<section>
 					<h2>案例：鸢尾花的花瓣</h2>
 					<p>已知有三个品种的鸢尾花，它们花瓣的长度和宽度各不相同。现有150朵鸢尾花花瓣的长宽数据，请问你能否把它们按品种归类？</p>
-					<img src="img/irises.jpgs" alt="">
+					<img src="img/irises.jpg" alt="">
 				</section>
 				<section data-background-iframe="http://10.199.172.124:8888/notebooks/Documents/design-fixation-ppt/examples/iris.ipynb"></section>
+			</section>
+			<section>
+				<h2>刚才发生了什么</h2>
+				<ol>
+					<li>目标：在二维空间中找到三个中心点，让样本点到某个中心点的距离尽量近</li>
+					<li>量化误差：loss=样本点到中心点的距离</li>
+					<li>迭代：重新选择中心点，让loss尽量小</li>
+				</ol>
 			</section>
 			<section>
 				<h2>机器学习小结</h2>
@@ -244,7 +252,7 @@
 
 			<section>
 				<h2>take a 5-minute break</h2>
-				<p>please be free to ask me any question</p>
+				<p>be free to ask me any question</p>
 				<p>下节预告：<a href="mypaper.html">论文交流</a></p>
 			</section>
 

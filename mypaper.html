@@ -39,7 +39,7 @@
 			</section>
 
 			<section>
-				<h2>论文内容概要</h2>
+				<h2>内容概要</h2>
 				<ol>
 					<li>背景知识介绍</li>
 					<li>实验数据的获取与分析</li>
@@ -116,7 +116,7 @@
 					<img src="img/experience.jpg">
 				</section>
 				<section>
-					<h4>方案固化程度评价量表</h4>
+					<h3>方案固化程度评价量表</h3>
 					<div class="flex-container">
 						<div class="flex-1">
 							<img src="img/scale.jpg" width="70%">
@@ -131,11 +131,8 @@
 						</div>
 					</div>
 				</section>
-			</section>
-
-			<!-- 评价结果 -->
-			<section>
 				<section>
+					<h3>结果计算方法</h3>
 					<div class="flex-container">
 						<div class="flex-1">
 							<p>每个方案的固化分值的计算方法：</p>
@@ -169,43 +166,46 @@
 						</div>
 					</div>
 				</section>
-				<section>
-					<h3>评价结果</h3>
-					<div class="flex-container">
-						<div class="flex-1">
-							<img src="img/scores.jpg" alt="">
-						</div>
-						<div class="flex-2">
-							<table>
-								<thead>
-									<tr>
-										<th>固化程度</th>
-										<th>数量</th>
-										<th>占比</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>轻微固化</td>
-										<td>55</td>
-										<td>34.8%</td>
-									</tr>
-									<tr>
-										<td>中等固化</td>
-										<td>59</td>
-										<td>37.3%</td>
-									</tr>
-									<tr>
-										<td>严重固化</td>
-										<td>44</td>
-										<td>27.8%</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</section>
 			</section>
+
+			<!-- 评价结果 -->
+			<section>
+				<h3>评价结果</h3>
+				<div class="flex-container">
+					<div class="flex-1">
+						<img src="img/scores.jpg" alt="">
+					</div>
+					<div class="flex-2">
+						<table>
+							<thead>
+								<tr>
+									<th>固化程度</th>
+									<th>数量</th>
+									<th>占比</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>轻微固化</td>
+									<td>55</td>
+									<td>34.8%</td>
+								</tr>
+								<tr>
+									<td>中等固化</td>
+									<td>59</td>
+									<td>37.3%</td>
+								</tr>
+								<tr>
+									<td>严重固化</td>
+									<td>44</td>
+									<td>27.8%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
 			<!-- ANOVA -->
 			<section>
 				<section>
@@ -270,12 +270,15 @@
 			<!-- 小结 -->
 			<section>
 				<h2>小结</h2>
-				<p>首先，我们获取了行为频次的数据、固化程度的数据，另外还有行为的视频数据</p>
-				<p>其次，我们证明了固化程度对
-					<em>画图</em>、
-					<em>动眼</em>、
-					<em>转头</em>的频次有显著影响，并且存在显著相关性</p>
-				<p>所以，理论上我们只要统计一个方案创造期间设计师这三种行为的频次就能知道这个方案的固化程度</p>
+				<p>通过上述两个实验，取得以下成果：</p>
+				<ol>
+					<li>获取了行为频次数据($x$)、固化程度数据($y$)</li>
+					<li>证明了固化程度对
+						<em>画图</em>、
+						<em>动眼</em>、
+						<em>转头</em>的频次有显著影响，并且存在显著相关性</li>
+				</ol>
+				<p>所以，理论上我们可以建立一个$y$关于$x$的模型，只要统计一个方案创作期间设计师这三种行为的出现频次，就能知道这个方案的固化程度</p>
 			</section>
 			<!-- 机器学习 -->
 			<section>
@@ -288,7 +291,8 @@
 			</section>
 			<!-- 模型1 -->
 			<section>
-				<h3>行为识别模型</h3>
+				<h2>行为识别模型</h2>
+				<p>作用：通过图像识别行为</p>
 				<p>用到了以下材料：</p>
 				<ul>
 					<li>Nvidia GTX 1060 显卡</li>
@@ -298,10 +302,182 @@
 				</ul>
 			</section>
 			<section>
+				<h2>建模步骤</h2>
+				<ol>
+					<li>标注数据</li>
+					<li>数据增强</li>
+					<li>搭建模型</li>
+					<li>训练模型</li>
+					<li>交叉验证</li>
+					<li>可视化结果</li>
+				</ol>
+			</section>
+			<section>
+				<h3>1 标注数据</h3>
+				<ol>
+					<li>用premiere编辑视频，按行为类别切成视频片段后导出
+						<img src="img/premiere.jpg" width="50%">
+					</li>
+					<li>使用Python的图像处理库PIL、Imageio，以8帧/秒的速率对视频片段进行采样，保存成.jpg</li>
+				</ol>
+			</section>
+			<section>
+				<h3>2 数据增强</h3>
+				<p>将原始图像进行随机缩放、旋转、反转、剪切等操作后生成新的图像用以扩充训练集的数据量。</p>
+				<img src="img/data_augmentation.jpg" alt="">
+				<p>Keras框架中有相关工具，实现起来非常简单</p>
+			</section>
+			<section>
 				<section>
-					<h4>建模及训练的步骤</h4>
-					<p>1 数据准备</p>
+					<h3>3 搭建模型</h3>
+					<p>模型以VGG16作为基础的深度卷积神经网络，保留了其13个卷积层和相应的权值</p>
+					<img src="img/vgg16.jpg" alt="">
 				</section>
+				<section>
+					<p>然后在这13个卷积层后面加上了2个全连阶层，这两层的权值需要训练</p>
+					<img src="img/nn.jpg" width="60%">
+				</section>
+			</section>
+			<section>
+				<h3>4 训练模型</h3>
+				<p>过程就是挂机，略过</p>
+				<p>但要多次调试参数，选其中最好的一次结果</p>
+			</section>
+			<section>
+				<h3>5 交叉验证</h3>
+				<p>把数据分成三份：训练集（60%）、验证集（20%）、测试集（20%）</p>
+				<img src="img/data_split.png" alt="">
+			</section>
+			<section>
+				<h3>6 可视化结果</h3>
+				<p>正确率86.88%</p>
+				<img src="img/cnn_result.jpg" alt="">
+			</section>
+			<!-- 模型2 -->
+			<section>
+				<h2>固化识别模型</h2>
+				<p>通过行为频次识别是否固化</p>
+				<p>用到了以下材料：</p>
+				<ul>
+					<li>机器学习库Scikit-learn</li>
+					<li>固化程度评价实验的数据</li>
+				</ul>
+			</section>
+			<section>
+				<h2>建模步骤</h2>
+				<ol>
+					<li>PCA</li>
+					<li>SVM</li>
+					<li>K-fold交叉验证</li>
+					<li>结果可视化</li>
+				</ol>
+			</section>
+			<section>
+				<section>
+					<h3>PCA</h3>
+					<P>PCA用于对数据进行降维（4维 => 2维）</P>
+					<p>因为样本容量较小，减少特征变量的数量可以显著增加模型的准确度</p>
+				</section>
+				<section>
+					<h3>PCA结果</h3>
+					<div class="flex-container">
+						<div class="flex-1">
+							<img src="img/pca_rock.jpg" alt="">
+						</div>
+						<div class="flex-1">
+							<img src="img/pca_1.jpg" alt="">
+							<img src="img/pca_2.jpg" alt="">
+						</div>
+					</div>
+				</section>
+			</section>
+			<section>
+				<h3>SVM</h3>
+				<p>支持向量机（Support Vector Machine）相比神经网络而言，在小样本训练条件下具有准确性高的优点</p>
+				<p>使用了四种配置建立四个模型，取性能最好的一个</p>
+				<table>
+					<thead>
+						<tr>
+							<th>模型编号</th>
+							<th>分类器类型</th>
+							<th>核函数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Model A</td>
+							<td>SVC</td>
+							<td>Linear</td>
+						</tr>
+						<tr>
+							<td>Model B</td>
+							<td>SVC</td>
+							<td>RBF</td>
+						</tr>
+						<tr>
+							<td>Model C</td>
+							<td>SVC</td>
+							<td>Poly</td>
+						</tr>
+						<tr>
+							<td>Model D</td>
+							<td>LinearSVC</td>
+							<td>无</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+				<h3>K-fold交叉验证</h3>
+				<p>适用于数据量较少，无法60%/20%/20%分的时候</p>
+				<img src="img/kfold.jpg" width="60%">
+			</section>
+			<section>
+				<section>
+					<h3>结果可视化</h3>
+					<p>四个模型中，Model B的平均正确率最高，达到72.31%</p>
+					<img src="img/model_all_result.png" width="80%">
+				</section>
+				<section>
+					<p>Model B各次结果之间差别较小，标准差为4.69%，表明模型有较好的稳定性</p>
+					<img src="img/model_b_result.png" width="80%">
+				</section>
+				<section>
+					<div class="flex-container">
+						<div class="flex-2">
+							<p>x轴：成分1；y轴：成分2</p>
+							<p>黄点：非固化样本；蓝点：固化样本</p>
+							<p>蓝绿区域交界线：决策边界</p>
+							<p>处于边界内（绿色区域）的样本被模型识别为固化状态</p>
+						</div>
+						<div class="flex-3">
+							<img src="img/svm_result.png">
+						</div>
+					</div>
+				</section>
+			</section>
+			<!-- 系统开发 -->
+			<section>
+				<h2>识别系统原型开发</h2>
+				<img src="img/sequence.png" width="60%">
+			</section>
+			<!-- 总结 -->
+			<section>
+				<h2>总结</h2>
+				<img src="img/path.png" alt="">
+			</section>
+			<section>
+				<h2>反思</h2>
+				<h3>有一个坑你们尽量不要踩</h3>
+				<p>主观评价误差非常大</p>
+			</section>
+
+			<section>
+				<h2>take a 5-minute break</h2>
+				<p>be free to ask me any question</p>
+				<p>下节预告：
+					<a href="myexperience.html">论文撰写经验</a>
+				</p>
 			</section>
 		</div>
 	</div>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<!-- <link rel="stylesheet" href="css/theme/black.css"> -->
+	<link rel="stylesheet" href="css/theme/white.css">
+	<!-- <link rel="stylesheet" href="css/theme/solarized.css"> -->
+
+	<!-- my style -->
+	<link rel="stylesheet" href="css/mystyle.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>论文撰写经验</h1>
+				<p>不要把时间浪费在
+					<em>“写”</em>论文上</p>
+			</section>
+			<section>
+				<h2>内容概要</h2>
+				<ol>
+					<li>时间安排</li>
+					<li>工具</li>
+					<li>
+						<del>word编辑技巧</del>
+					</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>时间规划</h2>
+				<ul>
+					<li>11月写好开题报告</li>
+					<li>寒假前跟老师沟通好论文的整体思路</li>
+					<li>开学前写完论文框架以及第一章内容（一万字）</li>
+					<li>3月前2周做完实验</li>
+					<li>清明节前写完初稿（三万字以上）</li>
+					<li>四月中旬交论文</li>
+				</ul>
+			</section>
+
+			<section>
+				<section>
+					<h2>文献管理工具</h2>
+					<img class="no-border" src="img/zotero.jpg" alt="">
+					<p>
+						<a href="https://www.zotero.org/">Zotero</a>
+					</p>
+					<p>免费、Windows/macOS、跨设备同步、多人协作</p>
+				</section>
+				<section data-background-video="video/zotero_demo.mp4"></section>
+			</section>
+			<section>
+				<section>
+					<h2>文件同步工具</h2>
+					<img class="no-border" src="img/nutstore.jpg" width="200px">
+					<p>
+						<a href="https://www.jianguoyun.com">坚果云</a>
+					</p>
+					<p>免费、Windows/macOS、跨设备同步、多人协作</p>
+				</section>
+				<section data-background-video="video/nutstore_demo.mp4"></section>
+			</section>
+			<section>
+				<section>
+					<h2>作图工具</h2>
+					<img class="no-border" src="img/processon.png" alt="">
+					<p>
+						<a href="https://www.processon.com/">ProcessOn</a>
+					</p>
+					<p>在线、免费、模板丰富</p>
+				</section>
+				<section>
+					<img src="img/processon_1.jpg" alt="">
+				</section>
+				<section>
+					<img src="img/processon_2.png" alt="">
+				</section>
+				<section>
+					<img src="img/processon_3.png" width="50%">
+				</section>
+				<section>
+					<img src="img/processon_4.png" width="80%">
+				</section>
+			</section>
+
+			<section>
+				<h2>word编辑技巧</h2>
+				<p>DIY (Don't Repeat Yourself)</p>
+				<ul>
+					<li>所有格式都通过样式编辑，以便复用</li>
+					<li>所有图表都使用<em>题注</em>和<em>交叉引用</em>，以免修改序号</li>
+				</ul>
+			</section>
+
+			<section>
+				<h1>END</h1>
+				<p>be free to ask me any question</p>				
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			// controls: false,
+			math: {
+				mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+				config: 'TeX-AMS_HTML-full' // See http://docs.mathjax.org/en/latest/config-files.html
+			},
+			dependencies: [{
+				src: 'plugin/markdown/marked.js'
+			},
+			{
+				src: 'plugin/markdown/markdown.js'
+			},
+			{
+				src: 'plugin/notes/notes.js',
+				async: true
+			},
+			{
+				src: 'plugin/highlight/highlight.js',
+				async: true,
+				callback: function () {
+					hljs.initHighlightingOnLoad();
+				}
+			},
+			{
+				src: 'socket.io/socket.io.js',
+				async: true
+			},
+			{
+				src: 'plugin/notes-server/client.js',
+				async: true
+			},
+			{
+				src: 'plugin/math/math.js',
+				async: true
+			}
+			]
+		});
+	</script>
+</body>
+
+</html>
