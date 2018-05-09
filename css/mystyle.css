@@ -15,3 +15,7 @@
 .reveal blockquote {
     width: 90%
 }
+
+.reveal .no-border {
+    border: none;
+}
