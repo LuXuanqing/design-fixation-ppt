@@ -16,6 +16,12 @@
     width: 90%
 }
 
-.reveal .no-border {
+.reveal .slides .no-border {
     border: none;
+}
+.reveal .slides .left {
+    text-align: left;
+}
+.reveal .slides .right {
+    text-align: right;
 }
