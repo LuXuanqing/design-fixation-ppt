@@ -31,6 +31,7 @@
 <body>
 	<div class="reveal">
 		<div class="slides">
+			<!-- 导航 -->
 			<section>
 				<h1>用机器学习做点什么</h1>
 				<h2>毕业论文经验分享</h2>
@@ -39,12 +40,838 @@
 			<section>
 				<h2>分享内容概要</h2>
 				<ol>
-					<li><a href="machine-learning.html"> 背景知识：机器学习介绍（15min）</a></li>
-					<li><a href="mypaper.html">论文交流：如何用机器学习做这个研究（20min）</a></li>
-					<li><a href="myexperience.html">论文撰写经验：工具、技巧、注意事项（5min）</a></li>
+					<li>
+						<a href="#ml"> 背景知识：机器学习介绍（15min）</a>
+					</li>
+					<li>
+						<a href="#mypaper">论文交流：如何用机器学习做这个研究（20min）</a>
+					</li>
+					<li>
+						<a href="#myexp">论文撰写经验：工具、技巧、注意事项（5min）</a>
+					</li>
+				</ol>
+				<div class="flex-container">
+					<div class="flex-1">
+						<img src="/img/qr.png" width="45%" class="no-border">
+					</div>
+					<div class="flex-1 left">
+						<p>&nbsp;</p>
+						<p>同步观看PPT</p>
+						<a href="http://10.199.172.124:1947/">http://10.199.172.124:1947/</a>
+					</div>
+				</div>
+			</section>
+			<!-- 导航结束 -->
+			<!-- ML开始 -->
+			<section id="ml">
+				<h1>机器学习</h1>
+				<h2>Machine Learning</h2>
+			</section>
+			<section>
+				<h2>什么是机器学习</h2>
+				<blockquote>机器学习是用数据或以往的经验，以此优化计算机程序的性能标准。</blockquote>
+				<blockquote>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P,
+					if its performance at tasks in T, as measured by P, improves with experience E.</blockquote>
+			</section>
+			<section>
+				<section>
+					<h2>小游戏：人肉学习</h2>
+					<p>规则：程序会随机生成一个
+						<em>0到1之间的小数</em>，你要尽可能准确地猜测它的大小</p>
+					<p>提示：每次猜测后程序都会告诉你一个指标，指标的大小反映了你猜测误差的大小</p>
+					<p>PS：我也没那么严格，你把指标降到0.0001以下就算你赢了</p>
+				</section>
+				<section data-background-iframe="http://10.199.172.124:8888/notebooks/Documents/design-fixation-ppt/examples/game1-human%20learning.ipynb"></section>
+			</section>
+			<section>
+				<h2>刚才发生了什么</h2>
+				<aside class="notes">
+					对应地解释一下TPE
+				</aside>
+				<dl>
+					<div class="fragment">
+						<dt>T - tasks</dt>
+						<dd>尽可能准确地猜出数字大小</dd>
+					</div>
+					<div class="fragment">
+						<dt>P - performance measure</dt>
+						<dd>误差指标</dd>
+					</div>
+					<div class="fragment">
+						<dt>E - experience</dt>
+						<dd>你多次猜测后的获得的经验</dd>
+					</div>
+				</dl>
+			</section>
+			<section>
+				<h2>小结：机器学习工作原理</h2>
+				<p class="fragment">所有机器学习都是这3步：</p>
+				<ol>
+					<li class="fragment">确定目标</li>
+					<li class="fragment">量化误差</li>
+					<li class="fragment">迭代</li>
 				</ol>
 			</section>
-			
+			<section>
+				<h2>三类基本算法</h2>
+				<ul>
+					<li>线性回归 (linear regression)</li>
+					<li>分类 (classification)</li>
+					<li>聚类 (cluster)</li>
+				</ul>
+			</section>
+			<section>
+				<h2>线性回归</h2>
+				<h3>linear regression</h3>
+				<p>根据一些变量的值来预测另一些变量的值（连续变量），例如根据面积、房龄预测房屋售价</p>
+				<p>它就像是建立一个$y$关于$x$的方程，只要输入特征变量($x$)，就能预测结果($y$)</p>
+			</section>
+
+			<section>
+				<section>
+					<h3>一个小学数学水平的案例</h3>
+					<p>已知在一个平面坐标系内有一些点，它们的$(x,y)$坐标如下：</p>
+					<table>
+						<tbody>
+							<tr>
+								<td>$x$</td>
+								<td>0</td>
+								<td>2</td>
+								<td>4</td>
+								<td>8</td>
+								<td>16</td>
+							</tr>
+							<tr>
+								<td>$y$</td>
+								<td>1</td>
+								<td>5</td>
+								<td>9</td>
+								<td>17</td>
+								<td>33</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>如果告诉你这个平面上还有一个点，它的$x$坐标是10，那么你觉得他的$y$坐标该是多少？</p>
+				</section>
+				<section>
+					<p>数字太抽象了</p>
+					<p>我们通过可视化来观察一下</p>
+				</section>
+				<section data-background-iframe="http://10.199.172.124:8888/notebooks/Documents/design-fixation-ppt/examples/regression.ipynb"></section>
+			</section>
+
+			<section>
+				<h3>现实情况往往要复杂一些</h3>
+				<div class="flex-container">
+					<div class="fllex-1">
+						<img src="img/regression_true.png" width="80%">
+						<p>不是每个点都正好在直线上</p>
+					</div>
+					<div class="flex-1 fragment">
+						<p>$y=kx+b$，$k$和$b$是你需要猜的数字</p>
+						<ol>
+							<li>定义目标：用一个函数尽可能地拟合这些点</li>
+							<li>量化误差：loss=点到直线的距离（垂直方向上）</li>
+							<li>迭代：不断调整$k$和$b$，让loss尽量小</li>
+						</ol>
+					</div>
+				</div>
+			</section>
+			<section>
+				<aside class="notes">
+					第一步往往是最难的，因为要把一个具象、现实的问题，转变为抽象的数学描述，需要一些数学功底。
+					第二部相对简单一些，如果你能用数学语言描述一个问题，那么如何量化指标也就很好做。
+					第三步最没难度，完全是拼电脑配置和人的耐心
+				</aside>
+				<p>结合刚才玩过的智障游戏，再想一想这三个步骤</p>
+				<ol>
+					<li>确定目标</li>
+					<li>量化误差</li>
+					<li>迭代</li>
+				</ol>
+			</section>
+			<section>
+				<h2>更复杂的情况</h2>
+				<ul>
+					<li class="fragment">多个特征变量：$y=2x_1-5x_2$</li>
+					<li class="fragment">非线性：$y=x^3-3x^2+2x$
+						<br />
+						<img src="img/regression_nonlinear.png">
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>分类</h2>
+				<h3>classification</h3>
+			</section>
+			<section>
+				<aside class="notes">
+					比如预测一个人是的性别，那么y的取值范围就是0到1。1代表男，0代表女。y越接近1，他是男人的可能性就越大，反之亦然
+				</aside>
+				<h3>二分类问题</h3>
+				<p>依然通过线性回归预测$y$的值：
+					<br />当$y$超过某个阈值时，则认为它是第一类；
+					<br />当$y$未达到某个阈值时，则认为它是第二类</p>
+			</section>
+			<section>
+				<h3>多分类问题</h3>
+				<p>转变为二分类问题来解决，以三分类为例：</p>
+				<ol>
+					<li>判断是/不是第一类，得到一个概率值$P_1$</li>
+					<li>判断是/不是第二类，得到一个概率值$P_2$</li>
+					<li>判断是/不是第三类，得到一个概率值$P_3$</li>
+					<li>看$P_1 P_2 P_3$哪个最大就是哪个</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>聚类</h2>
+				<h3>cluster</h3>
+			</section>
+			<section>
+				<p>聚类就是把一个数据集分成若干个子集，每个子集中的样本拥有相似的属性</p>
+				<p>它是一种
+					<strong>非监督学习</strong>
+				</p>
+				<table class="fragment">
+					<thead>
+						<tr>
+							<th>算法</th>
+							<th>类别</th>
+							<th>备注</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>回归</td>
+							<td>监督</td>
+							<td>要告诉机器每个$x$对应的$y$</td>
+						</tr>
+						<tr>
+							<td>分类</td>
+							<td>监督</td>
+							<td>要告诉机器每个样本对应的类别</td>
+						</tr>
+						<tr>
+							<td>聚类</td>
+							<td>非监督</td>
+							<td>不用告诉机器哪些样本是同一类</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+				<section>
+					<h2>案例：鸢尾花的花瓣</h2>
+					<p>已知有三个品种的鸢尾花，它们花瓣的长度和宽度各不相同。现有150朵鸢尾花花瓣的长宽数据，请问你能否把它们按品种归类？</p>
+					<img src="img/irises.jpg" alt="">
+				</section>
+				<section data-background-iframe="http://10.199.172.124:8888/notebooks/Documents/design-fixation-ppt/examples/iris.ipynb"></section>
+			</section>
+			<section>
+				<h2>刚才发生了什么</h2>
+				<ol>
+					<li>目标：在二维空间中找到三个中心点，让样本点到某个中心点的距离尽量近</li>
+					<li>量化误差：loss=样本点到中心点的距离</li>
+					<li>迭代：重新选择中心点，让loss尽量小</li>
+				</ol>
+			</section>
+			<section>
+				<aside class="notes">
+					解释一下连续和离散变量。协同过滤不仅可以推荐人，还可以推荐电影。
+				</aside>
+				<h2>机器学习小结</h2>
+				<p>当你手中有了若干样本的数据，你就可以用机器学习做这些事情：</p>
+				<ol>
+					<li>回归：根据一些变量的值来预测另一些变量的值（连续变量），例如根据面积、房龄预测房屋售价</li>
+					<li>分类：根据一些变量的值来预测其种类（离散变量），例如根据三围预测性别</li>
+					<li>聚类：根据一些变量的值把样本分为若干类，例如根据对电影的评分为你推荐感兴趣的人（协同过滤）</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>take a 5-minute break</h2>
+				<p>be free to ask me any question</p>
+				<p>下节预告：
+					<a href="#mypaper">论文交流</a>
+				</p>
+			</section>
+			<!-- ML结束 -->
+			<!-- paper开始 -->
+			<section id="mypaper">
+				<h1>基于体态语言的设计固化识别方法研究</h1>
+				<p>用机器学习
+					<q>做了一点微小的工作</q>
+				</p>
+			</section>
+			<section>
+				<h2>内容概要</h2>
+				<ol>
+					<li>背景知识介绍</li>
+					<li>实验数据的获取与分析</li>
+					<li>通过机器学习建立识别模型</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>背景知识</h2>
+				<ul>
+					<li>体态语言：可以粗浅地理解为
+						<em>行为</em>
+					</li>
+					<li>设计固化：可以粗浅地理解为
+						<em>方案重复</em>
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>如何识别固化</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>特征变量 $x$</th>
+							<th>结果 $y$</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>各行为的频次</td>
+							<td>固化程度</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>用机器学习建立一个$y=f(x)$的方程<br/>在建模的时候同时需要$x$和$y$（监督学习）<br/>但是在建完之后，只要输入$x$就能预测出$y$</p>
+			</section>
+			<!-- 体态语言获取实验 -->
+			<section>
+				<h2>如何获得$x$（行为频次）</h2>
+			</section>
+			<section>
+				<h3>体态语言获取实验</h3>
+				<p>对杯子进行造型的概念设计，观察被试的行为表现</p>
+				<p>目的是获取设计过程中会出现哪些行为，以及每个方案创作期间各行为的出现频次</p>
+				<img src="img/exp1.jpg" width="50%">
+			</section>
+			<section>
+				<h3>设计行为谱</h3>
+				<p>最后通过对12名被试的观察，得出了8种设计行为</p>
+				<img src="img/behaviors3.jpg" width="60%">
+			</section>
+			<!-- 方案固化程度评价实验 -->
+			<section>
+				<h2>如何获得$y$(固化程度)</h2>
+			</section>
+			<section>
+				<h3>固化程度评价实验</h3>
+				<p>邀请6位专家对12名被试设计的158个方案草图进行评价，确定其固化程度</p>
+				<img src="img/exp2.jpeg" width="50%">
+			</section>
+			<section>
+				<section>
+					<h3>固化程度评价方法</h3>
+					<p>目前相关研究所用的方法主要是统计重复方案数量</p>
+				</section>
+				<section>
+					<p>我提出了两个评价指标以及一种改良的评价方法</p>
+					<ul>
+						<li>经验性重复度：与已经画好的方案进行比较</li>
+						<li>先验性重复度：与事先已在脑中的方案进行比较</li>
+					</ul>
+					<img src="img/experience.jpg">
+				</section>
+				<section>
+					<h3>方案固化程度评价量表</h3>
+					<div class="flex-container">
+						<div class="flex-1">
+							<img src="img/scale.jpg" width="70%">
+						</div>
+						<div class="flex-1">
+							<p>两个评价条目：</p>
+							<ol>
+								<li>先验性重复度</li>
+								<li>经验性重复度</li>
+							</ol>
+							<p>每个条目0-30分</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>结果计算方法</h3>
+					<div class="flex-container">
+						<div class="flex-1">
+							<p>每个方案固化分值的计算方法：</p>
+							<p>$f=\frac{\sum_{i=1}^n{PR_i+ER_i}}{2n}$</p>
+							<p>其中$PR$为先验性重复度；$ER$为经验性重复度</p>
+						</div>
+						<div class="flex-1">
+							<p>根据$f$可以对固化程度划分等级</p>
+							<table>
+								<thead>
+									<tr>
+										<th>分值范围</th>
+										<th>类别</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>0-10</td>
+										<td>轻微固化</td>
+									</tr>
+									<tr>
+										<td>11-20</td>
+										<td>中等固化</td>
+									</tr>
+									<tr>
+										<td>21-30</td>
+										<td>严重固化</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- 评价结果 -->
+			<section>
+				<aside class="notes">
+					其实左边这个图没什么用，就是放论文里好看而已。中间那根正态分布的线我也不知道有什么用，SPSS画的，有这个选项我就点上它自动画出来了
+				</aside>
+				<h3>评价结果</h3>
+				<div class="flex-container">
+					<div class="flex-1">
+						<img src="img/scores.jpg">
+					</div>
+					<div class="flex-2">
+						<table>
+							<thead>
+								<tr>
+									<th>固化程度</th>
+									<th>数量</th>
+									<th>占比</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>轻微固化</td>
+									<td>55</td>
+									<td>34.8%</td>
+								</tr>
+								<tr>
+									<td>中等固化</td>
+									<td>59</td>
+									<td>37.3%</td>
+								</tr>
+								<tr>
+									<td>严重固化</td>
+									<td>44</td>
+									<td>27.8%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+			<!-- ANOVA -->
+			<section>
+				<section>
+					<h3>单因素方差分析</h3>
+					<div class="flex-container">
+						<div class="flex-3">
+							<p>用于检验不同水平对实验指标有无显著性影响</p>
+							<blockquote>实验中要考察的指标称为实验指标，影响实验指标的条件称为因素，因素所处的状态称为水平。</blockquote>
+						</div>
+						<div class="flex-2">
+							<dl>
+								<dt>实验指标</dt>
+								<dd>各行为的频次</dd>
+								<dt>因素</dt>
+								<dd>固化</dd>
+								<dt>水平</dt>
+								<dd>固化程度</dd>
+							</dl>
+						</div>
+					</div>
+				</section>
+				<section>
+					<aside class="notes">
+						主要就是看显著性sig，小于0.05
+					</aside>
+					<h4>结果</h4>
+					<div class="flex-container">
+						<div class="flex-1">
+							<img src="img/anova.JPG" width="80%">
+						</div>
+						<div class="flex-1">
+							<p>固化水平对以下三项指标有显著影响</p>
+							<ul>
+								<li>画图频次</li>
+								<li>动眼频次</li>
+								<li>转头频次</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</section>
+			<!-- pearson -->
+			<section>
+				<aside class="notes">
+					比如圆的周长C与半径R，它们的r值肯定为1（1和-1是极值），代表C和r之间完全是线性关系。学过初中数学都知道C=2πr
+				</aside>
+				<section>
+					<h3>皮尔森相关系数</h3>
+					<p>反映两个变量的线性相关程度，一般用$r$表示</p>
+					<blockquote>$r$的正负：相关性的正负，当$r>0$时表示两者正相关，反之亦然。<br/>$r$的绝对值：线性关系的强弱，当$|r|=1$时表示两者是完全的线性关系；当$r=0$时表示不存在线性关系。</blockquote>
+				</section>
+				<section>
+					<h4>结果</h4>
+					<div class="flex-container">
+						<div class="flex-1">
+							<img src="img/pearson.JPG" alt="">
+						</div>
+						<div class="flex-1">
+							<p>固化分值与以下行为的频次显著正相关，但相关性不强</p>
+							<ul>
+								<li>画图</li>
+								<li>动眼</li>
+								<li>动嘴</li>
+								<li>转头</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+			</section>
+			<!-- 小结 -->
+			<section>
+				<h2>小结</h2>
+				<p>通过上述两个实验，取得以下成果：</p>
+				<ol>
+					<li>获取了行为频次数据($x$)、固化程度数据($y$)</li>
+					<li>证明了固化程度对
+						<em>画图</em>、
+						<em>动眼</em>、
+						<em>转头</em>的频次有显著影响，并且存在显著相关性</li>
+				</ol>
+				<p>所以，理论上我们可以建立一个$y$关于$x$的模型，只要统计一个方案创作期间设计师这三种行为的出现频次，就能知道这个方案的固化程度</p>
+			</section>
+			<!-- 机器学习 -->
+			<section>
+				<h2>通过机器学习识别设计固化</h2>
+				<p>分两步走：</p>
+				<ol>
+					<li>通过图像识别行为</li>
+					<li>通过行为统计识别固化</li>
+				</ol>
+				<img src="img/recognition.jpg" class="no-border">
+			</section>
+			<!-- 模型1 -->
+			<section>
+				<h2>行为识别模型</h2>
+				<p>作用：通过图像识别行为</p>
+				<p>用到了以下材料：</p>
+				<ul>
+					<li>Nvidia GTX 1060 显卡</li>
+					<li>深度学习框架Keras</li>
+					<li>经过预训练的VGG16卷积神经网络</li>
+					<li>体态语言获取实验中记录的视频</li>
+				</ul>
+			</section>
+			<section>
+				<h2>建模步骤</h2>
+				<ol>
+					<li>标注数据</li>
+					<li>数据增强</li>
+					<li>搭建模型</li>
+					<li>训练模型</li>
+					<li>交叉验证</li>
+					<li>可视化结果</li>
+				</ol>
+			</section>
+			<section>
+				<h3>1 标注数据</h3>
+				<ol>
+					<li>用premiere编辑视频，按行为类别切成片段后导出
+						<img src="img/premiere.jpg" width="50%">
+					</li>
+					<li>使用Python的图像处理库PIL、Imageio，以8帧/秒的速率对视频片段进行采样，保存成.jpg</li>
+				</ol>
+			</section>
+			<section>
+				<aside class="notes">
+					下面的图虽然看起来每张都不一样，其实都是同一张图
+				</aside>
+				<h3>2 数据增强</h3>
+				<p>将原始图像进行随机缩放、旋转、反转、剪切等操作后生成新的图像用以扩充训练集的数据量。</p>
+				<img src="img/data_augmentation.jpg" alt="">
+				<p>Keras框架中有相关工具，实现起来非常简单</p>
+			</section>
+			<section>
+				<section>
+					<h3>3 搭建模型</h3>
+					<p>模型以VGG16作为基础的深度卷积神经网络，保留了其13个卷积层和相应的权值</p>
+					<img src="img/vgg16.jpg" alt="">
+				</section>
+				<section>
+					<p>然后在这13个卷积层后面加上了2个全连阶层，这两层的权值需要训练</p>
+					<img src="img/nn.jpg" width="60%">
+				</section>
+			</section>
+			<section>
+				<h3>4 训练模型</h3>
+				<p>过程就是挂机，略过</p>
+				<p>但要多次调试参数，选其中最好的一次结果</p>
+			</section>
+			<section>
+				<aside class="notes">
+					有些人会37分两份，但这样不是最好的，最好的是分三份。具体为什么就不展开了，很多人完全没实践过机器学习，在这里讲这些细节没什么用，如果有谁遇到这个问题的话可以问我。
+				</aside>
+				<h3>5 交叉验证</h3>
+				<p>把数据分成三份：训练集（60%）、验证集（20%）、测试集（20%）</p>
+				<img src="img/data_split.png" class="no-border">
+			</section>
+			<section>
+				<h3>6 结果可视化</h3>
+				<p>正确率86.88%</p>
+				<img src="img/cnn_result.jpg" class="no-border">
+			</section>
+			<!-- 模型2 -->
+			<section>
+				<aside class="notes">
+					解释一下各条线什么含义，图拿什么做的
+				</aside>
+				<h2>固化识别模型</h2>
+				<p>通过行为频次识别是否固化</p>
+				<p>用到了以下材料：</p>
+				<ul>
+					<li>机器学习库Scikit-learn</li>
+					<li>行为统计数据（$x$）</li>
+					<li>固化程度评价实验的数据（$y$）</li>
+				</ul>
+			</section>
+			<section>
+				<h2>建模步骤</h2>
+				<ol>
+					<li>PCA</li>
+					<li>SVM</li>
+					<li>K-fold交叉验证</li>
+					<li>结果可视化</li>
+				</ol>
+			</section>
+			<section>
+				<section>
+					<h3>PCA</h3>
+					<P>用于对数据进行降维（4维 => 2维）</P>
+					<p>因为样本容量较小，减少特征变量的数量可以显著增加模型的准确度</p>
+				</section>
+				<section>
+					<h3>PCA结果</h3>
+					<div class="flex-container">
+						<div class="flex-1">
+							<img src="img/pca_rock.jpg" class="no-border">
+						</div>
+						<div class="flex-1">
+							<img src="img/pca_1.jpg" class="no-border">
+							<img src="img/pca_2.jpg" class="no-border">
+						</div>
+					</div>
+				</section>
+			</section>
+			<section>
+				<h3>SVM</h3>
+				<p>支持向量机（Support Vector Machine）相比神经网络而言，在小样本训练条件下具有准确性高的优点</p>
+				<p>使用了四种配置建立四个模型，取性能最好的一个</p>
+				<table>
+					<thead>
+						<tr>
+							<th>模型编号</th>
+							<th>分类器类型</th>
+							<th>核函数</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Model A</td>
+							<td>SVC</td>
+							<td>Linear</td>
+						</tr>
+						<tr>
+							<td>Model B</td>
+							<td>SVC</td>
+							<td>RBF</td>
+						</tr>
+						<tr>
+							<td>Model C</td>
+							<td>SVC</td>
+							<td>Poly</td>
+						</tr>
+						<tr>
+							<td>Model D</td>
+							<td>LinearSVC</td>
+							<td>无</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section>
+				<h3>K-fold交叉验证</h3>
+				<p>适用于数据量较少，无法60%/20%/20%分的时候</p>
+				<img src="img/kfold.jpg" width="60%" class="no-border">
+			</section>
+			<section>
+				<section>
+					<h3>结果可视化</h3>
+					<p>四个模型中，Model B的平均正确率最高，达到72.31%</p>
+					<img src="img/model_all_result.png" width="80%" class="no-border">
+				</section>
+				<section>
+					<p>Model B各次结果之间差别较小，标准差为4.69%，表明模型有较好的稳定性</p>
+					<img src="img/model_b_result.png" width="80%" class="no-border">
+				</section>
+				<section>
+					<div class="flex-container">
+						<div class="flex-2 left">
+							<p>x轴：成分1<br/>y轴：成分2</p>
+							<p>黄点：非固化样本<br/>蓝点：固化样本</p>
+							<p>蓝绿区域交界线：决策边界</p>
+							<p>处于边界内（绿色区域）的样本被模型识别为固化状态</p>
+						</div>
+						<div class="flex-3">
+							<img src="img/svm_result.png" class="no-border">
+						</div>
+					</div>
+				</section>
+			</section>
+			<!-- 系统开发 -->
+			<section>
+				<section>
+					<h2>识别系统原型开发</h2>
+					<img src="img/sequence.png" width="60%">
+				</section>
+				<section>
+					<h3>某设计师正在使用本系统</h3>
+					<img src="img/app.jpeg" width="70%" class="no-border">
+				</section>
+			</section>
+			<!-- 总结 -->
+			<section>
+				<h2>总结</h2>
+				<img src="img/path.png" alt="">
+			</section>
+			<section>
+				<h2>反思</h2>
+				<h3>有一个坑你们尽量不要踩</h3>
+				<p>主观评价误差非常大</p>
+			</section>
+
+			<section>
+				<h2>take a 5-minute break</h2>
+				<p>be free to ask me any question</p>
+				<p>下节预告：
+					<a href="#myexp">论文撰写经验</a>
+				</p>
+			</section>
+			<!-- paper结束 -->
+			<!-- exp开始 -->
+			<section>
+				<h1>论文撰写经验</h1>
+				<p>不要把时间浪费在
+					<em>“写”</em>论文上</p>
+			</section>
+			<section>
+				<h2>内容概要</h2>
+				<ol>
+					<li>时间安排</li>
+					<li>工具</li>
+					<li>
+						<del>word编辑技巧</del>
+					</li>
+				</ol>
+			</section>
+
+			<section>
+				<h2>时间规划</h2>
+				<ul>
+					<li>11月写好开题报告</li>
+					<li>寒假前跟老师沟通好论文的整体思路</li>
+					<li>开学前写完论文框架以及第一章内容（一万字）</li>
+					<li>3月前2周做完实验</li>
+					<li>清明节前写完初稿（三万字以上）</li>
+					<li>四月中旬交论文</li>
+				</ul>
+			</section>
+
+			<section>
+				<section>
+					<h2>文献管理工具</h2>
+					<img class="no-border" src="img/zotero.jpg" alt="">
+					<p>
+						<a href="https://www.zotero.org/">Zotero</a>
+					</p>
+					<p>免费、Windows/macOS、跨设备同步、多人协作</p>
+				</section>
+				<section>
+					<h3>搜索并添加文献演示</h3>
+					<video data-autoplay class="stretch" src="video/zotero_demo.mp4" controls></video>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>文件同步工具</h2>
+					<img class="no-border" src="img/nutstore.jpg" width="200px">
+					<p>
+						<a href="https://www.jianguoyun.com">坚果云</a>
+					</p>
+					<p>免费、Windows/macOS、跨设备同步、多人协作</p>
+				</section>
+				<section>
+					<h3>跨设备文件同步演示</h3>
+					<video data-autoplay class="stretch" src="video/nutstore_demo.mp4" controls></video>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>作图工具</h2>
+					<img class="no-border" src="img/processon.png" alt="">
+					<p>
+						<a href="https://www.processon.com/">ProcessOn</a>
+					</p>
+					<p>在线、免费、模板丰富</p>
+				</section>
+				<section>
+					<img src="img/processon_1.jpg" alt="">
+				</section>
+				<section>
+					<img src="img/processon_2.png" alt="">
+				</section>
+				<section>
+					<img src="img/processon_3.png" width="50%">
+				</section>
+				<section>
+					<img src="img/processon_4.png" width="80%">
+				</section>
+			</section>
+
+			<section>
+				<h2>word编辑技巧</h2>
+				<p>DIY (Don't Repeat Yourself)</p>
+				<ul>
+					<li>所有格式都通过样式编辑，以便复用</li>
+					<li>所有图表都使用
+						<em>题注</em>和
+						<em>交叉引用</em>，以免修改序号</li>
+				</ul>
+			</section>
+
+			<section>
+				<aside class="notes">
+					提一下轮流分享的想法
+				</aside>
+				<h1>END</h1>
+				<p>be free to ask me any question</p>
+			</section>
+			<!-- exp结束 -->
 		</div>
 	</div>
 
